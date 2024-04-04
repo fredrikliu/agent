@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
-import org.springframework.cloud.openfeign.FeignContext;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 

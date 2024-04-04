@@ -32,6 +32,7 @@ import com.tencent.cloud.polaris.context.PolarisConfigModifier;
 import com.tencent.cloud.polaris.context.PolarisSDKContextManager;
 import com.tencent.cloud.polaris.context.ServiceRuleManager;
 import com.tencent.cloud.polaris.context.config.PolarisContextProperties;
+import com.tencent.cloud.polaris.config.config.PolarisCryptoConfigProperties;
 import com.tencent.cloud.polaris.extend.consul.ConsulConfigModifier;
 import com.tencent.cloud.polaris.extend.consul.ConsulContextProperties;
 import com.tencent.cloud.polaris.extend.nacos.NacosConfigModifier;
@@ -87,6 +88,8 @@ public class Holder {
     private static StaticMetadataManager staticMetadataManager;
 
     private static PolarisContextProperties polarisContextProperties;
+
+    private static PolarisCryptoConfigProperties polarisCryptoConfigProperties;
 
     private static PolarisRuleBasedRouterProperties routerProperties;
 
@@ -246,7 +249,7 @@ public class Holder {
             modifiers.add(new NacosConfigModifier(nacosContextProperties));
         }
         if (polarisConfigProperties.isEnabled()) {
-            modifiers.add(new ConfigurationModifier(polarisConfigProperties, polarisContextProperties));
+            modifiers.add(new ConfigurationModifier(polarisConfigProperties, polarisCryptoConfigProperties, polarisContextProperties));
         }
 
         contextManager = new PolarisSDKContextManager(polarisContextProperties, environment, modifiers);

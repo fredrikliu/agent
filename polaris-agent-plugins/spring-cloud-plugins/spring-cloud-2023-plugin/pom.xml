@@ -17,6 +17,8 @@
         <spring.cloud.tencent.version>1.13.1-2023.0.0</spring.cloud.tencent.version>
         <spring.boot.version>3.2.3</spring.boot.version>
         <slf4j.vesion>1.7.30</slf4j.vesion>
+        <jdk.version>17</jdk.version>
+        <jdk.home>${env.JAVA_17_HOME}</jdk.home>
     </properties>
 
     <dependencyManagement>
@@ -27,6 +29,12 @@
                 <version>${spring.boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>jakarta.servlet</groupId>
+                <artifactId>jakarta.servlet-api</artifactId>
+                <version>6.0.0</version>
+                <scope>provided</scope>
             </dependency>
             <!-- Spring Cloud Dependencies -->
             <dependency>
@@ -51,6 +59,10 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.tencent.polaris</groupId>
             <artifactId>polaris-agent-core-extension</artifactId>
