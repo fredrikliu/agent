@@ -19,6 +19,7 @@ package cn.polarismesh.agent.plugin.spring.cloud.interceptor.filter.reactive;
 
 import cn.polarismesh.agent.plugin.spring.cloud.common.Holder;
 import cn.polarismesh.agent.plugin.spring.cloud.interceptor.BaseInterceptor;
+import com.tencent.cloud.polaris.context.config.PolarisContextProperties;
 import com.tencent.cloud.metadata.core.DecodeTransferMetadataReactiveFilter;
 import com.tencent.cloud.polaris.ratelimit.filter.QuotaCheckReactiveFilter;
 import com.tencent.cloud.polaris.ratelimit.resolver.RateLimitRuleArgumentReactiveResolver;
@@ -73,7 +74,9 @@ public class ReactiveWebFilterInterceptor extends BaseInterceptor {
         }
         LOGGER.info("[PolarisAgent] {} enable add WebFilter to build transfer metadata ability", target.getClass().getCanonicalName());
 
-        filters.add(0, new DecodeTransferMetadataReactiveFilter());
+        PolarisContextProperties polarisContextProperties = new PolarisContextProperties();
+
+        filters.add(0, new DecodeTransferMetadataReactiveFilter(polarisContextProperties));
     }
 
 }

@@ -22,13 +22,17 @@ import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.tencent.polaris.api.pojo.ServiceKey;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import com.tencent.polaris.metadata.core.MetadataProvider;
 import com.tencent.cloud.common.metadata.MetadataContextHolder;
 import com.tencent.cloud.common.util.JacksonUtils;
 import com.tencent.cloud.metadata.core.CustomTransitiveMetadataResolver;
 import com.tencent.cloud.metadata.core.TransHeadersTransfer;
+import com.tencent.cloud.metadata.provider.ServletMetadataProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -70,7 +74,9 @@ public class RouterHandlerAdapter  implements HandlerAdapter {
 		Map<String, String> internalDisposableMetadata = getInternalMetadata(request, CUSTOM_DISPOSABLE_METADATA);
 		Map<String, String> mergedDisposableMetadata = new HashMap<>(internalDisposableMetadata);
 
-		MetadataContextHolder.init(mergedTransitiveMetadata, mergedDisposableMetadata);
+		ServletMetadataProvider servletMetadataProvider = new ServletMetadataProvider(request, "");
+
+		MetadataContextHolder.init(mergedTransitiveMetadata, mergedDisposableMetadata, servletMetadataProvider);
 
 		TransHeadersTransfer.transfer(request);
 		return adapter.handle(request, response, handler);

@@ -19,9 +19,10 @@ package cn.polarismesh.agent.plugin.spring.cloud.interceptor.invoker;
 
 import cn.polarismesh.agent.plugin.spring.cloud.common.Holder;
 import cn.polarismesh.agent.plugin.spring.cloud.interceptor.BaseInterceptor;
-import com.tencent.cloud.metadata.core.EncodeTransferMedataFeignInterceptor;
+import com.tencent.cloud.metadata.core.EncodeTransferMedataFeignEnhancedPlugin;
 import com.tencent.cloud.polaris.router.RouterRuleLabelResolver;
 import com.tencent.cloud.polaris.router.feign.RouterLabelFeignInterceptor;
+import com.tencent.cloud.rpc.enhancement.plugin.EnhancedPlugin;
 import feign.RequestInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,7 +61,7 @@ public class FeignInterceptor extends BaseInterceptor {
 					Holder.getPolarisContextProperties()
 
 			));
-			ret.put(EncodeTransferMedataFeignInterceptor.class.getCanonicalName(), new EncodeTransferMedataFeignInterceptor());
+			ret.put(EncodeTransferMedataFeignEnhancedPlugin.class.getCanonicalName(), new EncodeTransferMedataFeignEnhancedPlugin());
 		}
 
 	}

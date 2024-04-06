@@ -56,6 +56,7 @@ import org.springframework.core.ResolvableType;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.PropertiesPropertySource;
 import org.springframework.core.env.StandardEnvironment;
+import com.tencent.cloud.plugin.lossless.config.LosslessProperties;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -94,6 +95,8 @@ public class Holder {
     private static PolarisRuleBasedRouterProperties routerProperties;
 
     private static PolarisNearByRouterProperties nearByRouterProperties;
+
+    private static LosslessProperties losslessProperties;
 
     private static PolarisMetadataRouterProperties metadataRouterProperties;
 
@@ -333,5 +336,9 @@ public class Holder {
 
     public static boolean isAllowDiscovery() {
         return allowDiscovery;
+    }
+
+    public static LosslessProperties getLosslessProperties() {
+        return losslessProperties;
     }
 }

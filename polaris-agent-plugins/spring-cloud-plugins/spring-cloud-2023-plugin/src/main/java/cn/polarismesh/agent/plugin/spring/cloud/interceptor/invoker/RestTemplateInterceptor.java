@@ -18,7 +18,7 @@ package cn.polarismesh.agent.plugin.spring.cloud.interceptor.invoker;
 
 import cn.polarismesh.agent.plugin.spring.cloud.common.Holder;
 import cn.polarismesh.agent.plugin.spring.cloud.interceptor.BaseInterceptor;
-import com.tencent.cloud.metadata.core.EncodeTransferMedataRestTemplateInterceptor;
+import com.tencent.cloud.metadata.core.EncodeTransferMedataRestTemplateEnhancedPlugin;
 import com.tencent.cloud.polaris.router.RouterRuleLabelResolver;
 import com.tencent.cloud.polaris.router.resttemplate.RouterLabelRestTemplateInterceptor;
 import org.slf4j.Logger;
@@ -58,7 +58,7 @@ public class RestTemplateInterceptor extends BaseInterceptor {
 		boolean find = false;
 		for (ClientHttpRequestInterceptor interceptor : ret) {
 			if (Objects.equals(interceptor.getClass()
-					.getCanonicalName(), EncodeTransferMedataRestTemplateInterceptor.class.getCanonicalName())) {
+					.getCanonicalName(), EncodeTransferMedataRestTemplateEnhancedPlugin.class.getCanonicalName())) {
 				find = true;
 				break;
 			}
@@ -70,7 +70,7 @@ public class RestTemplateInterceptor extends BaseInterceptor {
 			return;
 		}
 		List<ClientHttpRequestInterceptor> tmp = new ArrayList<>();
-		tmp.add(new EncodeTransferMedataRestTemplateInterceptor());
+		tmp.add(new EncodeTransferMedataRestTemplateEnhancedPlugin());
 		tmp.add(new RouterLabelRestTemplateInterceptor(
 				Collections.emptyList(),
 				Holder.getStaticMetadataManager(),
