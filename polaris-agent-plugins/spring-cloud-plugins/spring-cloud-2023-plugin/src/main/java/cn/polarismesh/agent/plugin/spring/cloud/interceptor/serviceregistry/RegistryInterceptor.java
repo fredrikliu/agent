@@ -52,20 +52,16 @@ public class RegistryInterceptor extends BaseInterceptor {
         }
 
         LOGGER.debug("[PolarisAgent] replace ServiceRegistry to ProxyServiceRegistry, target : {}", target);
-        ServiceRegistry<Registration> registry;
-        LosslessProxyServiceRegistry losslessProxyServiceRegistry;
 
         String clsName = target.getClass().getCanonicalName();
-
         if (clsName.contains("org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration")) {
-            registry = (ServiceRegistry<Registration>) ReflectionUtils.getObjectByFieldName(target, "serviceRegistry");
-            losslessProxyServiceRegistry = new LosslessProxyServiceRegistry(registry);
-            ReflectionUtils.setValueByFieldName(target, "serviceRegistry", losslessProxyServiceRegistry);
+            ServiceRegistry<Registration> registry = (ServiceRegistry<Registration>) ReflectionUtils.getObjectByFieldName(target, "serviceRegistry");
+            ReflectionUtils.setValueByFieldName(target, "serviceRegistry", new ProxyServiceRegistry(registry));
         } else {
-            registry = (ServiceRegistry<Registration>) ReflectionUtils.getSuperObjectByFieldName(target, "serviceRegistry");
-            losslessProxyServiceRegistry = new LosslessProxyServiceRegistry(registry);
-            ReflectionUtils.setSuperValueByFieldName(target, "serviceRegistry", losslessProxyServiceRegistry);
+            ServiceRegistry<Registration> registry = (ServiceRegistry<Registration>) ReflectionUtils.getSuperObjectByFieldName(target, "serviceRegistry");
+            ReflectionUtils.setSuperValueByFieldName(target, "serviceRegistry", new ProxyServiceRegistry(registry));
         }
+
         LOGGER.debug("[PolarisAgent] finished replace ServiceRegistry to ProxyServiceRegistry");
     }
 

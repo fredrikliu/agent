@@ -201,7 +201,7 @@ public class Holder {
 
         Properties properties = new Properties();
 
-        String confPath = Paths.get(CONF_FILE_PATH, "plugin", "spring-cloud-2021", "application.properties").toString();
+        String confPath = Paths.get(CONF_FILE_PATH, "plugin", "spring-cloud-2023", "application.properties").toString();
         String cmdVal = System.getProperty("polaris.agent.user.application.conf");
         if (StringUtils.isNotBlank(cmdVal)) {
             confPath = cmdVal;
