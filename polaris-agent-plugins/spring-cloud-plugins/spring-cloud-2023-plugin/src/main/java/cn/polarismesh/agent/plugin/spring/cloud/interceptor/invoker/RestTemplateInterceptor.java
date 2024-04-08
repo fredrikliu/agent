@@ -70,7 +70,7 @@ public class RestTemplateInterceptor extends BaseInterceptor {
 			return;
 		}
 		List<ClientHttpRequestInterceptor> tmp = new ArrayList<>();
-		tmp.add(new EncodeTransferMedataRestTemplateEnhancedPlugin());
+	//	tmp.add(new EncodeTransferMedataRestTemplateEnhancedPlugin());
 		tmp.add(new RouterLabelRestTemplateInterceptor(
 				Collections.emptyList(),
 				Holder.getStaticMetadataManager(),

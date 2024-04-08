@@ -61,7 +61,7 @@ public class FeignInterceptor extends BaseInterceptor {
 					Holder.getPolarisContextProperties()
 
 			));
-			ret.put(EncodeTransferMedataFeignEnhancedPlugin.class.getCanonicalName(), new EncodeTransferMedataFeignEnhancedPlugin());
+		//	ret.put(EncodeTransferMedataFeignEnhancedPlugin.class.getCanonicalName(), new EncodeTransferMedataFeignEnhancedPlugin());
 		}
 
 	}

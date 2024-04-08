@@ -14,6 +14,6 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>spring-cloud-plugins-examples</module>
-	</modules>
+    </modules>
 
 </project>

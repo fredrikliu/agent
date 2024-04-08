@@ -21,6 +21,7 @@ import cn.polarismesh.agent.core.common.exception.PolarisAgentException;
 import cn.polarismesh.agent.plugin.spring.cloud.configuration.AgentPolarisRateLimitProperties;
 import com.tencent.cloud.common.metadata.StaticMetadataManager;
 import com.tencent.cloud.common.metadata.config.MetadataLocalProperties;
+import com.tencent.cloud.plugin.lossless.config.LosslessConfigModifier;
 import com.tencent.cloud.polaris.DiscoveryConfigModifier;
 import com.tencent.cloud.polaris.PolarisDiscoveryConfigModifier;
 import com.tencent.cloud.polaris.PolarisDiscoveryProperties;
@@ -128,6 +129,7 @@ public class Holder {
         rateLimitProperties = new AgentPolarisRateLimitProperties();
         polarisConfigProperties = new PolarisConfigProperties();
         polarisStatProperties = new PolarisStatProperties();
+        losslessProperties = new LosslessProperties();
         rpcEnhancementReporterProperties = new RpcEnhancementReporterProperties();
 
         discoveryProperties.setService(Holder.getLocalService());
@@ -174,6 +176,8 @@ public class Holder {
 
             // 监控
             bindObject("spring.cloud.polaris.stat", polarisStatProperties, environment);
+
+            bindObject("spring.cloud.polaris.lossless", losslessProperties, environment);
 
             // rpc 调用增强
             bindObject("spring.cloud.tencent.rpc-enhancement.reporter", rpcEnhancementReporterProperties, environment);
@@ -243,7 +247,8 @@ public class Holder {
                 new PolarisDiscoveryConfigModifier(discoveryProperties),
                 new RateLimitConfigModifier(rateLimitProperties),
                 new StatConfigModifier(polarisStatProperties, environment),
-                new CircuitBreakerConfigModifier(rpcEnhancementReporterProperties)
+                new CircuitBreakerConfigModifier(rpcEnhancementReporterProperties),
+                new LosslessConfigModifier(losslessProperties)
         ));
         if (consulContextProperties.isEnabled()) {
             modifiers.add(new ConsulConfigModifier(consulContextProperties));

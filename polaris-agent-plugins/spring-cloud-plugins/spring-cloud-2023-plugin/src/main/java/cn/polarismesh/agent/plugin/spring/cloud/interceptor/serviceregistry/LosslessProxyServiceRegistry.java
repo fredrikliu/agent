@@ -39,7 +39,7 @@ public class LosslessProxyServiceRegistry implements ServiceRegistry<Registratio
 	private final ServiceRegistry<Registration> target;
 
 	public LosslessProxyServiceRegistry(ServiceRegistry<Registration> target) {
-		this.target = target;;
+		this.target = target;
 	}
 
 	@Override
